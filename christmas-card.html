@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>平安夜快乐</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #ee3f4d, #b13340);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(to bottom, #0c2446, #1e1637);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            cursor: pointer;
+            color: white;
+        }
+
+        .card.open {
+            transform: rotateY(160deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(to bottom, #1e1637, #0c2446);
+        }
+
+        .scene {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        .candle {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: flicker 1s infinite alternate;
+        }
+
+        .message {
+            text-align: center;
+            color: #fff;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .click-message {
+            position: absolute;
+            bottom: 20px;
+            color: #fff;
+            font-size: 0.8em;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes flicker {
+            0% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff8c00; }
+            100% { text-shadow: 0 0 15px #fff, 0 0 25px #fff, 0 0 35px #ff8c00; }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+
+        .moon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700;
+        }
+
+        .church {
+            font-size: 40px;
+            margin-top: 10px;
+            color: #a0a0a0;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="stars"></div>
+        <div class="card-front">
+            <div class="scene">
+                <div class="moon">🌙</div>
+                <div class="candle">🕯️</div>
+            </div>
+            <div class="message">愿每个落日之后都是平安夜。</div>
+            <div class="click-message">点击打开祝福</div>
+        </div>
+        <div class="card-back">
+            <div class="message">
+                To 竞莹:<hr>
+                太多人祝你平安，<br><br>
+                但是我还希望你快乐。<br><br>
+                平安夜快乐! ✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 卡片翻转效果
+        const card = document.querySelector('.card');
+        card.addEventListener('click', () => {
+            card.classList.toggle('open');
+        });
+
+        // 创建星星
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = star.style.height = Math.random() * 2 + 1 + 'px';
+                star.style.animationDelay = Math.random() * 1 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // 初始化星星
+        createStars();
+    </script>
+</body>
+</html>
